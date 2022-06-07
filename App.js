@@ -14,8 +14,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
   return (
-    
-     <NavigationContainer>
+    <NavigationContainer>
       <Tab.Navigator
         initialRouteName='Home'
         activeColor='white'
