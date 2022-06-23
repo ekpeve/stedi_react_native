@@ -13,6 +13,19 @@ const sendText=async (phoneNumber)=>{
 
 }
 
+const getToken = async ({phoneNumber, oneTimePassword}) =>{
+  const tokenResponse = await fetch('https://dev.stedi.me/twofactorlogin',{
+    method: 'POST',
+    body:JSON.stringify({oneTimePassword, phoneNumber}),
+    headers: {
+      'content-type':'application/json'
+    }
+  });
+
+  const tokenResponseString = await tokenResponse.text();
+  console.log(tokenResponseString);
+}
+
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [oneTimePassword, setOneTimePassword] = useState(null);
@@ -46,7 +59,7 @@ const Login = () => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={()=>{console.log('Login button was clicked')}}
+        onPress={()=>{getToken(phoneNumber,oneTimePassword )}}
     >
         <Text>Login</Text>
       </TouchableOpacity>
