@@ -66,7 +66,8 @@ const Login = (props) => {
       <TouchableOpacity
         style={styles.button}
         onPress={()=>{
-          getToken({phoneNumber, oneTimePassword, setUserLoggedIn:props.setUserLoggedIn });
+          //getToken({phoneNumber, oneTimePassword, setUserLoggedIn:props.setUserLoggedIn });
+        props.setUserLoggedIn(true)
         }}
     >
         <Text>Login</Text>
