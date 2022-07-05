@@ -26,7 +26,8 @@ return (
       >
         <Tab.Screen
           name='Home'
-          component={Home}
+          children={()=><Home loggedInUser='iusedtobeawesome@gmail.com'/>}
+          //component={Home}
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (

@@ -24,12 +24,13 @@ const getToken = async ({phoneNumber, oneTimePassword, setUserLoggedIn}) =>{
 
   const responseCode = tokenResponse.status;//200 means logged in successfully
   console.log("Response Status Code", responseCode);
+
   if(responseCode==200){
     setUserLoggedIn(true);
   }
 
   const tokenResponseString = await tokenResponse.text();
-  console.log(tokenResponseString);
+  console.log("Token", tokenResponseString);
 }
 
 const Login = (props) => {
@@ -66,8 +67,8 @@ const Login = (props) => {
       <TouchableOpacity
         style={styles.button}
         onPress={()=>{
-          //getToken({phoneNumber, oneTimePassword, setUserLoggedIn:props.setUserLoggedIn });
-        props.setUserLoggedIn(true)
+          getToken({phoneNumber, oneTimePassword, setUserLoggedIn:props.setUserLoggedIn });
+        //props.setUserLoggedIn(true)
         }}
     >
         <Text>Login</Text>
