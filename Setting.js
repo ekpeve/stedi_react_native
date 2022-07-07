@@ -4,9 +4,12 @@ import { Card, ListItem, Button, Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-function Setting() {
+function Setting(props) {
+  var uname = props.loggedInUser;
+  if (uname == undefined){uname = "Guest";}
     return(
       <View>
+        <Text>Welcome, {uname}!</Text>
       </View>
     )
   }

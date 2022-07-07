@@ -2,6 +2,11 @@ import {useState} from "react";
 import { SafeAreaView, StyleSheet, TextInput } from "react-native";
 import {Text, TouchableOpacity, View }from "react-native";
 
+var uname = "";
+export function set_uname(e) {uname = e; }
+export function get_uname() {return uname; }
+
+
 const sendText=async (phoneNumber)=>{
   console.log("PhoneNumber: ",phoneNumber);
   await fetch('https://dev.stedi.me/twofactorlogin/'+phoneNumber,{
@@ -25,12 +30,23 @@ const getToken = async ({phoneNumber, oneTimePassword, setUserLoggedIn}) =>{
   const responseCode = tokenResponse.status;//200 means logged in successfully
   console.log("Response Status Code", responseCode);
 
-  if(responseCode==200){
-    setUserLoggedIn(true);
-  }
+  
 
   const tokenResponseString = await tokenResponse.text();
   console.log("Token", tokenResponseString);
+
+  let loggedInUser_response = await fetch("https://dev.stedi.me/validate/" + tokenResponseString, {
+    method: "GET",
+    headers: {"content-type":"application/text"}
+  });
+
+  const loggedInUser = await loggedInUser_response.text();
+  console.log(loggedInUser);
+  set_uname(loggedInUser);
+
+  if(responseCode==200){
+    setUserLoggedIn(true);
+  }
 }
 
 const Login = (props) => {
